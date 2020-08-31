@@ -31,10 +31,7 @@ namespace IdentityTokenBasedAuth
             services.AddControllers();
             var connectionString = Configuration["ConnectionString:DBConnectionString"];
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(connectionString));
-            // Install - Package Microsoft.EntityFrameworkCore.SqlServer
-          
-
-
+            
             services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
             {
                 opt.User.RequireUniqueEmail = true;
@@ -44,7 +41,6 @@ namespace IdentityTokenBasedAuth
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireLowercase = false;
                 opt.Password.RequireDigit = false;
-
 
             }).AddEntityFrameworkStores<ApplicationDbContext>();
         
