@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "bC3XdbmC3QeG9hrScm6Fos78boHRnS5vuJBN57y412iCPmrnWMkrk6/IGOCy00nzALwSc46E9Dh0EYF7v4RNWA==",
+  "dgSpecHash": "9nakUblLhqCkedEz/mDRN073WjLJVbH6FBWSQcliGlkrXAcl8V8+Hg66IUQ5DY+RDzxhZbpr/ILtNwXMRqqVRw==",
   "success": true,
   "projectFilePath": "C:\\Users\\topra\\source\\repos\\IdentityTokenBasedAuth\\IdentityTokenBasedAuth\\IdentityTokenBasedAuth.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\topra\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.7\\microsoft.aspnetcore.authentication.jwtbearer.3.1.7.nupkg.sha512",
+    "C:\\Users\\topra\\.nuget\\packages\\microsoft.aspnetcore.authentication.twitter\\3.1.7\\microsoft.aspnetcore.authentication.twitter.3.1.7.nupkg.sha512",
     "C:\\Users\\topra\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.7\\microsoft.aspnetcore.cryptography.internal.3.1.7.nupkg.sha512",
     "C:\\Users\\topra\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.7\\microsoft.aspnetcore.cryptography.keyderivation.3.1.7.nupkg.sha512",
     "C:\\Users\\topra\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.7\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.7.nupkg.sha512",

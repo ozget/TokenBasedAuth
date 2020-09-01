@@ -62,3 +62,7 @@ C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\De
 C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Twitter.dll
+C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\obj\Debug\netcoreapp3.1\IdentityTokenBasedAuth.csproj.CoreCompileInputs.cache
+C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\obj\Debug\netcoreapp3.1\IdentityTokenBasedAuth.MvcApplicationPartsAssemblyInfo.cache

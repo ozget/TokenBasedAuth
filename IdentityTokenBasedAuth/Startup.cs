@@ -58,20 +58,21 @@ namespace IdentityTokenBasedAuth
                 //üyelik sistemi ile tokený birbirine baðlayan ortak bir þema belirtmemizi saðlýyor
                 //üyeler ve  bayiler olarak iki üye giriþi olduðunda birbirini ayýrt etmek için scheme yý kullanýyoruz. 
 
-            }).AddJwtBearer(jwtBearerOptions =>
-            jwtBearerOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-            {
+            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,jwtBearerOptions => 
+            { //token schemasý ile uygulamanýn semasý ayný olmasý için bir üsteki kodda ayný þeymayý belirtiyorum
+                jwtBearerOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
                 ValidateAudience = true,
                 ValidateIssuer = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = tokenOptions.Issuer,
                 ValidAudience = tokenOptions.Audience,
-                // IssuerSigningKey=SignHandler.
+                IssuerSigningKey=SignHandler.GetSecurityKey(tokenOptions.SecuntyKey),
                 //uygun bir token olup olmadýgýnýn kontrolünü yapýyor
                 ClockSkew = TimeSpan.Zero
-            };
-        });
+                };
+            });
 
         }
 
