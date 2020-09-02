@@ -14,7 +14,10 @@ namespace IdentityTokenBasedAuth.Domain.Services
         
         //Microsoft.AspNetCore.Authentication.Twitter
         Task<BaseResponse<AccessToken>> SingIn(SingInViewModelResource singInViewModel);
-    
+
+        Task<BaseResponse<AccessToken>> CreateTokenByRefreshToken(RefreshTokenViewModelResource refreshTokenViewModel);
+
+        Task<BaseResponse<AccessToken>> RevokeResfreshToken(RefreshTokenViewModelResource refreshTokenViewModel);
     
     }
 }
