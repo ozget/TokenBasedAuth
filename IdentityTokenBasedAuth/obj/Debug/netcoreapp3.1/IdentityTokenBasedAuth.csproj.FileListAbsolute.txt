@@ -64,3 +64,6 @@ C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\De
 C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Twitter.dll
+C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\bin\Debug\netcoreapp3.1\Mapster.dll
+C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\obj\Debug\netcoreapp3.1\IdentityTokenBasedAuth.csproj.CoreCompileInputs.cache
+C:\Users\topra\source\repos\IdentityTokenBasedAuth\IdentityTokenBasedAuth\obj\Debug\netcoreapp3.1\IdentityTokenBasedAuth.MvcApplicationPartsAssemblyInfo.cache

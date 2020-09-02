@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.1": {
       "IdentityTokenBasedAuth/1.0.0": {
         "dependencies": {
+          "Mapster": "6.5.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.7",
           "Microsoft.AspNetCore.Authentication.Twitter": "3.1.7",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.7",
@@ -302,6 +303,21 @@
         },
         "compile": {
           "IdentityTokenBasedAuth.dll": {}
+        }
+      },
+      "Mapster/6.5.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mapster.dll": {
+            "assemblyVersion": "6.5.0.0",
+            "fileVersion": "6.5.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Mapster.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.7": {
@@ -3094,6 +3110,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Mapster/6.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-j6SQzsq4AkTzkYbKpAgOtJ88b2FlVI2Tiz+saf6M0BeZWat8u8d8SrGB3k6ROguEYeRfC8ILwXXo4Ht+seVphQ==",
+      "path": "mapster/6.5.0",
+      "hashPath": "mapster.6.5.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.7": {
       "type": "package",
