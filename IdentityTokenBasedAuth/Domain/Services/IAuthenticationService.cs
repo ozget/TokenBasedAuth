@@ -1,6 +1,6 @@
 ﻿using IdentityTokenBasedAuth.Domain.Responses;
 using IdentityTokenBasedAuth.ResourceViewModels;
-using Microsoft.AspNetCore.Authentication.Twitter;
+using IdentityTokenBasedAuth.Security.Token;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,9 @@ namespace IdentityTokenBasedAuth.Domain.Services
 {
     public interface IAuthenticationService
     {
-        Task<BaseResponse<UserViewModelResource>> SingUp(UserViewModelResource userViewModel);
+        Task<BaseResponse<UserViewModelResource>> SignUp(UserViewModelResource userViewModel);
         
-        //Microsoft.AspNetCore.Authentication.Twitter
-        Task<BaseResponse<AccessToken>> SingIn(SingInViewModelResource singInViewModel);
+        Task<BaseResponse<AccessToken>> SignIn(SingInViewModelResource singInViewModel);
 
         Task<BaseResponse<AccessToken>> CreateTokenByRefreshToken(RefreshTokenViewModelResource refreshTokenViewModel);
 

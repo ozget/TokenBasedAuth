@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IdentityTokenBasedAuth.Security.Token
 {
-    interface ITokenHandler
+    public interface ITokenHandler
     {
-        AccesToken CreateAccessToken(ApplicationUser user);
+        AccessToken CreateAccessToken(ApplicationUser user);
 
         void RevokeRefreshToken(ApplicationUser user);
     }

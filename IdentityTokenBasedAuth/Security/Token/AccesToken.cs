@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace IdentityTokenBasedAuth.Security.Token
 {
-    public class AccesToken
+    public class AccessToken
     {
         public string Token { get; set; }
         public DateTime Expiration { get; set; }

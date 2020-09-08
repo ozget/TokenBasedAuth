@@ -19,9 +19,31 @@ namespace IdentityTokenBasedAuth.Services
 
         }
 
-        public Task<Tuple<ApplicationUser, IList<Claim>>> GetUserByRefreshToken(string refreshToken)
+        public async Task<Tuple<ApplicationUser, IList<Claim>>> GetUserByRefreshToken(string refreshToken)
         {
-            throw new NotImplementedException();
+            Claim claimRefreshToken = new Claim("refreshToken", refreshToken);
+
+            
+            // refresh token a gore var olan kullaniciyi donuyorum
+            var users = await userManager.GetUsersForClaimAsync(claimRefreshToken);
+
+            if (users.Any())
+            {
+                var user = users.First();
+                IList<Claim> userClaims = await userManager.GetClaimsAsync(user);
+                string refreshTokenEndDate = userClaims.First(c => c.Type == "refreshTokenEndDate").Value;
+                if (DateTime.Parse(refreshTokenEndDate) > DateTime.Now)
+                {// token omru dolmamis ise
+                    return new Tuple<ApplicationUser, IList<Claim>>(user, userClaims);
+                }
+                else
+                {
+                    return new Tuple<ApplicationUser, IList<Claim>>(null, null);
+                }
+
+            }
+            // refreshtoken sahip olmadigi icin null donuyoruz
+            return new Tuple<ApplicationUser, IList<Claim>>(null, null);
         }
 
         public async Task<ApplicationUser> GetUserByUserName(string userName)
@@ -29,9 +51,21 @@ namespace IdentityTokenBasedAuth.Services
             return await userManager.FindByNameAsync(userName);
         }
 
-        public Task<bool> RevokeRefreshToken(string refreshToken)
-        {
-            throw new NotImplementedException();
+        public async Task<bool> RevokeRefreshToken(string refreshToken)
+        {// kullanici logout oldugunda
+
+            var result = await GetUserByRefreshToken(refreshToken);
+            if (result.Item1 == null) return false;
+
+            IdentityResult response = await userManager.RemoveClaimsAsync(result.Item1, result.Item2);
+
+
+            if (response.Succeeded)
+            {
+                return true;
+            }
+            return false; 
+            
         }
 
         public async Task<BaseResponse<UserViewModelResource>> UpdateUser(UserViewModelResource userViewModel, string userName)
@@ -66,9 +100,23 @@ namespace IdentityTokenBasedAuth.Services
 
         }
 
-        public Task<BaseResponse<ApplicationUser>> UploadUserPicture(string picturePath, string userName)
+        public async Task<BaseResponse<ApplicationUser>> UploadUserPicture(string picturePath, string userName)
         {
-            throw new NotImplementedException();
+
+            ApplicationUser user = await userManager.FindByNameAsync(userName);
+            user.Picture = picturePath;
+            IdentityResult result = await userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                return new BaseResponse<ApplicationUser>(user);
+            }
+            else
+            {
+                return new BaseResponse<ApplicationUser>(result.Errors.First().Description);
+            }
+
+
         }
     }
 }
