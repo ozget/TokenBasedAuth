@@ -23,10 +23,11 @@ namespace IdentityTokenBasedAuth.Controllers
         //bir kullanicini erisim izninin olup olmadigini belirlemek icin bir action
         public ActionResult IsAuthenticaiton()
         {
+            // gecerli token ise true Sadece burasi token istiyor diger actionlar token istemiyor
             return Ok(User.Identity.IsAuthenticated);
         }
 
-        [HttpPost]
+        [HttpPost] // kullanici kaydetme
         public async Task<ActionResult> SignUp(UserViewModelResource userViewModelResource)
         {
            BaseResponse<UserViewModelResource> response=  await authenticationService.SignUp(userViewModelResource);
@@ -72,7 +73,7 @@ namespace IdentityTokenBasedAuth.Controllers
             }
 
         }
-        [HttpPost]
+        [HttpDelete]// kullanici cikis yapildiğinda calisacaktir
         public async Task<ActionResult> RevokeRefreshToken(RefreshTokenViewModelResource refreshTokenViewModelResource)
         {
             var response = await authenticationService.CreateTokenByRefreshToken(refreshTokenViewModelResource);

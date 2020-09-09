@@ -70,7 +70,7 @@ namespace IdentityTokenBasedAuth.Services
         
         }
 
-        public async Task<BaseResponse<AccessToken>> SingIn(SingInViewModelResource singInViewModel)
+        public async Task<BaseResponse<AccessToken>> SignIn(SingInViewModelResource singInViewModel)
         {
             // bir nevi login islemi
             ApplicationUser user = await userManager.FindByEmailAsync(singInViewModel.Email);
@@ -111,7 +111,7 @@ namespace IdentityTokenBasedAuth.Services
             return new BaseResponse<AccessToken>("Email yanlış");
         }
 
-        public async Task<BaseResponse<UserViewModelResource>> SingUp(UserViewModelResource userViewModel)
+        public async Task<BaseResponse<UserViewModelResource>> SignUp(UserViewModelResource userViewModel)
         {//kullanici kayit etme
             ApplicationUser user = new ApplicationUser
             {
@@ -119,7 +119,7 @@ namespace IdentityTokenBasedAuth.Services
                 Email=userViewModel.Email,
 
             };
-            IdentityResult result = await userManager.CreateAsync(user);
+            IdentityResult result = await userManager.CreateAsync(user,userViewModel.Password);
 
             if (result.Succeeded)
             {

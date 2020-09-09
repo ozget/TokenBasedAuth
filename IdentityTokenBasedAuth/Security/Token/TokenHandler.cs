@@ -21,7 +21,7 @@ namespace IdentityTokenBasedAuth.Security.Token
         {
             this.customTokenOptions = customTokenOptions.Value;
         }
-        public AccesToken CreateAccessToken(ApplicationUser user)
+        public AccessToken CreateAccessToken(ApplicationUser user)
         {
             var accessTokenExpiration = DateTime.Now.AddMinutes(customTokenOptions.AccessTokenExpiration);
             var securityKey = SignHandler.GetSecurityKey(customTokenOptions.SecuntyKey);
@@ -40,7 +40,7 @@ namespace IdentityTokenBasedAuth.Security.Token
             var handler = new JwtSecurityTokenHandler();
             var token = handler.WriteToken(jwtSecurityToken);
 
-            AccesToken accesToken = new AccesToken();
+            AccessToken accesToken = new AccessToken();
             accesToken.Token = token;
             accesToken.RefreshToken = CreateRefreshToken();
             accesToken.Expiration = accessTokenExpiration;

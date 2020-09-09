@@ -15,7 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting.Builder;
 using IdentityTokenBasedAuth.Security.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication;
+using IdentityTokenBasedAuth.Domain.Services;
+using IdentityTokenBasedAuth.Services;
 
 namespace IdentityTokenBasedAuth
 {
@@ -31,7 +32,30 @@ namespace IdentityTokenBasedAuth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddScoped<ITokenHandler, TokenHandler>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IUserService, UserService>();
+
+            //disaridan her istegi aciyoruz
+            services.AddCors(opt =>
+            {
+                opt.AddDefaultPolicy(builder =>
+                {
+                    //AllowAnyMethod get,post gibi tum metodlari kabul et
+                    //AllowAnyOrigin backend tarafindan her yerden istek yapilmasina izin veriyor
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
+
+            services.AddControllers() // sonuclar json formatinda gozukecektir
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.WriteIndented = true;
+                });
+            services.AddHealthChecks();
+
             var connectionString = Configuration["ConnectionString:DBConnectionString"];
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(connectionString));
 
@@ -58,27 +82,29 @@ namespace IdentityTokenBasedAuth
                 //üyelik sistemi ile tokený birbirine baðlayan ortak bir þema belirtmemizi saðlýyor
                 //üyeler ve  bayiler olarak iki üye giriþi olduðunda birbirini ayýrt etmek için scheme yý kullanýyoruz. 
 
-            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,jwtBearerOptions => 
-            { //token schemasý ile uygulamanýn semasý ayný olmasý için bir üsteki kodda ayný þeymayý belirtiyorum
+            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtBearerOptions =>
+             { //token schemasý ile uygulamanýn semasý ayný olmasý için bir üsteki kodda ayný þeymayý belirtiyorum
                 jwtBearerOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-                {
-                ValidateAudience = true,
-                ValidateIssuer = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = tokenOptions.Issuer,
-                ValidAudience = tokenOptions.Audience,
-                IssuerSigningKey=SignHandler.GetSecurityKey(tokenOptions.SecuntyKey),
-                //uygun bir token olup olmadýgýnýn kontrolünü yapýyor
-                ClockSkew = TimeSpan.Zero
-                };
-            });
+                 {
+                     ValidateAudience = true,
+                     ValidateIssuer = true,
+                     ValidateLifetime = true,
+                     ValidateIssuerSigningKey = true,
+                     ValidIssuer = tokenOptions.Issuer,
+                     ValidAudience = tokenOptions.Audience,
+                     IssuerSigningKey = SignHandler.GetSecurityKey(tokenOptions.SecuntyKey),
+                    //uygun bir token olup olmadýgýnýn kontrolünü yapýyor
+                    ClockSkew = TimeSpan.Zero
+                 };
+             });
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        {// Middleware
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -91,7 +117,8 @@ namespace IdentityTokenBasedAuth
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
-           
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
